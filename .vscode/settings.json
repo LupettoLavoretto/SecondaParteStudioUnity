@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "SecondaParteUnity.sln"
+    "dotnet.defaultSolution": "SecondaParteStudioUnity.sln"
 }
