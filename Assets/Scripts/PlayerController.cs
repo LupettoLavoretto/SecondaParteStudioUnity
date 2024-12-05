@@ -5,10 +5,19 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
-    private Animator playerAnim; 
+    private Animator playerAnim;
+
+    public ParticleSystem explosionParticle;
+    public ParticleSystem dirtParticle;
+    private AudioSource playerAudio;
+
+    public AudioClip jumpSound;
+    public AudioClip crashSound;
+
     public float  jumpForce = 10.0f;
     public float gravityModifier = 0.0f;
     public bool isOnGround = true;
+
     public bool gameOver;
 
 
@@ -17,6 +26,7 @@ public class PlayerController : MonoBehaviour
     {
         playerRb = GetComponent<Rigidbody>();
         playerAnim = GetComponent<Animator>();
+        playerAudio = GetComponent<AudioSource>();
         //*= ha la stessa logica di +=, una semplificazione di Physics.gravity = Physics.gravity * gravityModifier;
         Physics.gravity *= gravityModifier; 
     }
@@ -30,6 +40,9 @@ public class PlayerController : MonoBehaviour
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             //Per vedere dov'è jump_trig: lo troviamo in animator -> parameters
             playerAnim.SetTrigger("Jump_trig");
+            dirtParticle.Stop();
+            //PlayOneShot = suona una sola volta
+            playerAudio.PlayOneShot(jumpSound, 1.0f);
             isOnGround = false;
         }
     }
@@ -41,6 +54,7 @@ public class PlayerController : MonoBehaviour
             {
             
             isOnGround = true;
+            dirtParticle.Play();
 
             }
         
@@ -52,6 +66,10 @@ public class PlayerController : MonoBehaviour
             //Il primo è un booleano, per cui gli diciamo di selezionare la morte "b" come vera. Il secondo invece è un integrale, per cui dobbiamo dargli il valore numerico.
             playerAnim.SetBool("Death_b", true);
             playerAnim.SetInteger("DeathType_int", 1);
+            //Per far partire l'effetto delle particelle nel gioco
+            dirtParticle.Stop();
+            explosionParticle.Play();
+            playerAudio.PlayOneShot(crashSound, 1.0f);
         }    
     }
 }
