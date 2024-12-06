@@ -18,7 +18,8 @@ public class MoveLeftX : MonoBehaviour
     void Update()
     {
         // If game is not over, move to the left
-        if (playerControllerScript.gameOver)
+        //Per risolvere l'esercizio (il background partiva solo col gameover) è stato necessario mettere il !
+        if (!playerControllerScript.gameOver)
         {
             transform.Translate(Vector3.left * speed * Time.deltaTime, Space.World);
         }

@@ -13,8 +13,10 @@ public class SpawnManagerX : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("PrawnsObject", spawnDelay, spawnInterval);
+        //Per esercizio: veniva invocato il metodo sbagliato, ed erano stati assegnati gli oggetti di scena invece del prefab
+        InvokeRepeating("SpawnObjects", spawnDelay, spawnInterval);
         playerControllerScript = GameObject.Find("Player").GetComponent<PlayerControllerX>();
+
     }
 
     // Spawn obstacles

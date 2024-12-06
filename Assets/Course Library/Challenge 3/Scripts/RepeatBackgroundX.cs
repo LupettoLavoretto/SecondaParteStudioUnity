@@ -9,8 +9,9 @@ public class RepeatBackgroundX : MonoBehaviour
 
     private void Start()
     {
-        startPos = transform.position; // Establish the default starting position 
-        repeatWidth = GetComponent<BoxCollider>().size.y / 2; // Set repeat width to half of the background
+        startPos = transform.position; // Establish the default starting position
+        //Per esercizio: il background si ripeteva a cazzo, ma perché del BoxCollider era stato preso il valore y e non la x.
+        repeatWidth = GetComponent<BoxCollider>().size.x / 2; // Set repeat width to half of the background
     }
 
     private void Update()
